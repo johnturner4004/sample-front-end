@@ -102,6 +102,7 @@ module.exports = {
           'auth',
           'autocomplete',
           'autoincrement',
+          'axios',
           'basename',
           'bcrypt',
           'broadcasted',
