@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { type ReactElement } from 'react'
+import moment from 'moment'
 
-export default function GameInfo (): JSX.Element {
+interface Game {
+  id: number
+  name: string
+  date_added: string
+}
+
+export default function GameInfo (game: Game): ReactElement {
+  console.log('game', game)
   return (
     <>
-      <h2>Title</h2>
-      <p>Date</p>
+      <h2>{game.name}</h2>
+      <p>{moment(game.date_added).format('MMMM Do YYYY')}</p>
     </>
   )
 }

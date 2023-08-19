@@ -1,16 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { type ReactElement, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-export default function App (): JSX.Element {
-  const gameList = useSelector((store: any) => store.gameReducer)
+import GameInfo from './GameInfo'
+
+export default function App (): ReactElement {
+  interface Game {
+    id: number
+    name: string
+    date_added: string
+  }
+
+  const gameList: Game[] = useSelector((store: any) => store.gameReducer)
   const dispatch = useDispatch()
-  console.log('gameList:', gameList)
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GAME' })
   }, [])
 
   return (
-    <h1>Hello from React!</h1>
+    <>
+      {
+        gameList.length > 0
+          ? gameList.map((game: Game) => {
+            return (
+              <div key={game.id}>
+                <GameInfo {...game} />
+              </div>
+            )
+          })
+          : ''
+      }
+    </>
   )
 }
