@@ -8,10 +8,8 @@ interface Action {
 }
 
 function * fetchGame (): any {
-  console.log('Getting game')
   try {
     const response = yield axios.get('/api/game')
-    console.log(response)
     yield put({ type: 'SET_GAME', payload: response.data })
   } catch (err) {
     console.error(err)
@@ -19,8 +17,12 @@ function * fetchGame (): any {
 }
 
 function * insertGame (action: Action): any {
-  console.log('Insert a game')
-  console.log(action.payload)
+  try {
+    yield axios.post('/api/game', action.payload)
+    yield put({ type: 'FETCH_GAME' })
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 function * gameSaga (): any {

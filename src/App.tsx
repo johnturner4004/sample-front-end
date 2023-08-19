@@ -30,6 +30,7 @@ export default function App (): ReactElement {
       name: newName,
       date_added: dateAdded
     }
+    setShowForm(!showForm)
     dispatch({ type: 'INSERT_GAME', payload: newGame })
   }
 
