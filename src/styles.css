@@ -6,6 +6,11 @@ h2, p {
   margin: 0;
 }
 
+.game-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .game-list {
   display: flex;
 }
