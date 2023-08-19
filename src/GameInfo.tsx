@@ -12,7 +12,7 @@ export default function GameInfo (game: Game): ReactElement {
   return (
     <>
       <h2>{game.name}</h2>
-      <p>{moment(game.date_added).format('MMMM Do YYYY')}</p>
+      <p className='game-date'>{moment(game.date_added).format('MMMM Do YYYY')}</p>
     </>
   )
 }

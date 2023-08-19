@@ -1,5 +1,6 @@
 import React, { type ReactElement, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import './styles.css'
 
 import GameInfo from './GameInfo'
 
@@ -19,17 +20,20 @@ export default function App (): ReactElement {
 
   return (
     <>
-      {
-        gameList.length > 0
-          ? gameList.map((game: Game) => {
-            return (
-              <div key={game.id}>
-                <GameInfo {...game} />
-              </div>
-            )
-          })
-          : ''
-      }
+      <h1>Game Collection</h1>
+      <div className='game-list'>
+        {
+          gameList.length > 0
+            ? gameList.map((game: Game) => {
+              return (
+                <div className='game-info' key={game.id}>
+                  <GameInfo {...game} />
+                </div>
+              )
+            })
+            : ''
+        }
+      </div>
     </>
   )
 }
