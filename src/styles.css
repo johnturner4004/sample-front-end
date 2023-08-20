@@ -30,3 +30,8 @@ h2, p {
 .game-date {
   text-align: right;
 }
+
+.game-edit-buttons {
+  display: flex;
+  justify-content: flex-end;
+}

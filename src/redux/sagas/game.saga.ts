@@ -7,6 +7,12 @@ interface Action {
   payload?: any
 }
 
+interface Game {
+  id: number
+  name: string
+  date: string
+}
+
 function * fetchGame (): any {
   try {
     const response = yield axios.get('/api/game')
@@ -25,9 +31,20 @@ function * insertGame (action: Action): any {
   }
 }
 
+function * editGame (action: Action): any {
+  const game: Game = action.payload
+  try {
+    yield axios.put(`/api/game/${game.id}`, game)
+    yield put({ type: 'FETCH_GAME' })
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 function * gameSaga (): any {
   yield takeLatest('FETCH_GAME', fetchGame)
   yield takeLatest('INSERT_GAME', insertGame)
+  yield takeLatest('EDIT_GAME', editGame)
 }
 
 export default gameSaga

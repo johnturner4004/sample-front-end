@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { type ReactElement, useEffect, useState, type ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './styles.css'
