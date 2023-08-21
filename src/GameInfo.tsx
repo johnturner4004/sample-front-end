@@ -14,6 +14,7 @@ export default function GameInfo (game: Game): ReactElement {
   const [editMode, setEditMode] = useState(false)
   const [name, setName] = useState(game.name)
   const [date, setDate] = useState(game.date_added)
+  const [deleteMode, setDeleteMode] = useState(false)
 
   const handleSubmit = (): void => {
     const dateAdded = moment(date).format()
@@ -32,6 +33,10 @@ export default function GameInfo (game: Game): ReactElement {
     setEditMode(!editMode)
   }
 
+  const handleDelete = (): void => {
+    dispatch({ type: 'DELETE_GAME', payload: game })
+  }
+
   return (
     <>
       {
@@ -47,7 +52,20 @@ export default function GameInfo (game: Game): ReactElement {
           : <>
             <div className='game-header'>
               <h2>{game.name}</h2>
-              <button onClick={((): void => { setEditMode(!editMode) })}>Edit</button>
+              <div className='game-header__buttons'>
+                {
+                  deleteMode
+                    ? <>
+                      <p>Are you sure you want to delete?</p>
+                      <button onClick={(() => { handleDelete() })}>Yes</button>
+                      <button onClick={(() => { setDeleteMode(!deleteMode) })}>No</button>
+                    </>
+                    : <>
+                      <button onClick={((): void => { setEditMode(!editMode) })}>Edit</button>
+                      <button onClick={(() => { setDeleteMode(!deleteMode) })}>Delete</button>
+                    </>
+                }
+              </div>
             </div>
             <p className='game-date'>{moment(game.date_added).format('MMMM Do YYYY')}</p>
           </>

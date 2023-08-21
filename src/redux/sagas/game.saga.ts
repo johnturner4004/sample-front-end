@@ -41,10 +41,21 @@ function * editGame (action: Action): any {
   }
 }
 
+function * deleteGame (action: Action): any {
+  const game: Game = action.payload
+  try {
+    yield axios.delete(`/api/game/${game.id}`)
+    yield put({ type: 'FETCH_GAME' })
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 function * gameSaga (): any {
   yield takeLatest('FETCH_GAME', fetchGame)
   yield takeLatest('INSERT_GAME', insertGame)
   yield takeLatest('EDIT_GAME', editGame)
+  yield takeLatest('DELETE_GAME', deleteGame)
 }
 
 export default gameSaga
