@@ -20,6 +20,10 @@ export default function App (): ReactElement {
   const dispatch = useDispatch()
 
   const handleClick = (): void => {
+    if (showForm) {
+      setNewName('')
+      setNewDate('')
+    }
     setShowForm(!showForm)
   }
 
@@ -29,6 +33,8 @@ export default function App (): ReactElement {
       name: newName,
       date_added: dateAdded
     }
+    setNewName('')
+    setNewDate('')
     setShowForm(!showForm)
     dispatch({ type: 'INSERT_GAME', payload: newGame })
   }
