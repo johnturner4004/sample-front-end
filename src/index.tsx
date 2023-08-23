@@ -14,10 +14,13 @@ const middlewareList = process.env.NODE_ENV === 'development'
   ? [sagaMiddleware, logger]
   : [sagaMiddleware]
 
-const store = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middlewareList)
 })
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
 sagaMiddleware.run(rootSaga)
 

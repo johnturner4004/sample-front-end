@@ -2,6 +2,7 @@ import React, { type ReactElement, useEffect, useState, type ChangeEvent } from 
 import { useDispatch, useSelector } from 'react-redux'
 import './styles.css'
 import moment from 'moment'
+import { type RootState, type AppDispatch } from './index'
 
 import GameInfo from './GameInfo'
 
@@ -12,12 +13,15 @@ export default function App (): ReactElement {
     date_added: string
   }
 
+  type DispatchFunction = () => AppDispatch
+
   const [newName, setNewName] = useState('')
   const [newDate, setNewDate] = useState('')
   const [showForm, setShowForm] = useState(false)
 
-  const gameList: Game[] = useSelector((store: any) => store.gameReducer)
-  const dispatch = useDispatch()
+  const gameList: Game[] = useSelector((store: RootState) => store.gameReducer)
+  const useAppDispatch: DispatchFunction = useDispatch
+  const dispatch = useAppDispatch()
 
   const handleClick = (): void => {
     if (showForm) {
